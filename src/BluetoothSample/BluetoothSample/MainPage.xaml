@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BluetoothSample.MainPage"
-             xmlns:vm="clr-namespace:BluetoothSample.ViewModels">
+             xmlns:vm="clr-namespace:BluetoothSample.ViewModels"
+             xmlns:rs="clr-namespace:BluetoothSample.Resources">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -14,8 +15,8 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Bluetooth Sample App" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Label Text="This app shows all available Bluetooth devices near to the phone" FontSize="Title" Padding="30,10,30,10"/>
-        <Button Text="Show Device List" Padding="60,10" Command="{Binding Source={StaticResource vm}, Path=ShowDevicesListCommand}"/>
+        <Label Text="{x:Static rs:AppResources.AppDescription}" FontSize="Title" Padding="30,10,30,10"/>
+        <Button Text="{x:Static rs:AppResources.ShowDevices}" Padding="60,10" Command="{Binding Source={StaticResource vm}, Path=ShowDevicesListCommand}"/>
     </StackLayout>
 
 </ContentPage>
