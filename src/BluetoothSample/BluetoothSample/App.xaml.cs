@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using BluetoothSample.Views;
 
 namespace BluetoothSample
 {
@@ -10,7 +11,7 @@ namespace BluetoothSample
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MainView());
         }
 
         protected override void OnStart()

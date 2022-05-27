@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace BluetoothSample
+namespace BluetoothSample.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class MainView : ContentPage
     {
-        public MainPage()
+        public MainView()
         {
             InitializeComponent();
         }
