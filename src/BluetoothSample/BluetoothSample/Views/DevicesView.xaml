@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BluetoothSample.Views.DevicesView"
+             xmlns:vm="clr-namespace:BluetoothSample.ViewModels"
+             xmlns:converters="clr-namespace:BluetoothSample.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:DevicesViewModel x:Key="vm"/>
+            <converters:NativeDeviceToAddressConverter x:Key="NativeDeviceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <ListView x:Name="DeviceListView"
+            ItemsSource="{Binding Source={StaticResource vm}, Path=DeviceList}"
+            ItemTapped="Handle_ItemTapped"
+            RowHeight="70"
+            CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Text="{Binding NativeDevice, Converter={StaticResource NativeDeviceConverter}}" />
+                            <Label Grid.Row="2" Text="{Binding Rssi}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Scan devices" Command="{Binding Source={StaticResource vm}, Path=ScanBLECommand}"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>
