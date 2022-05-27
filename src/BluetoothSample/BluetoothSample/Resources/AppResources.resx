@@ -126,4 +126,7 @@
   <data name="ShowDevices" xml:space="preserve">
     <value>Show devices</value>
   </data>
+  <data name="SortDevicesByRssi" xml:space="preserve">
+    <value>Sort by RSSI</value>
+  </data>
 </root>

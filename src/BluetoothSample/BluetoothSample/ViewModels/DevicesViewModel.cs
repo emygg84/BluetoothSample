@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
@@ -23,6 +24,7 @@ namespace BluetoothSample.ViewModels
         {
             DeviceList = new ObservableCollection<IDevice>();
             ScanBLECommand = new Command(ScanBLE);
+            SortDevicesCommand = new Command(SortDevicesListByRssi);
 
             // obteniendo las instancias del hardware ble
             bleHandler = CrossBluetoothLE.Current;
@@ -120,6 +122,16 @@ namespace BluetoothSample.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("BluetoothSample", ex.Message, "Ok");
             }
+        }
+
+        public Command SortDevicesCommand { get; set; }
+
+        public void SortDevicesListByRssi()
+        {
+            var list = new List<IDevice>();
+            list.AddRange(DeviceList.OrderBy(d => d.Rssi));
+            DeviceList.Clear();
+            list.ForEach(e => DeviceList.Add(e));
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")

@@ -40,7 +40,8 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            <Button Text="{x:Static rs:AppResources.ScanForDevices}" Command="{Binding Source={StaticResource vm}, Path=ScanBLECommand}"/>
+            <Button Grid.Column="0" Text="{x:Static rs:AppResources.ScanForDevices}" Command="{Binding Source={StaticResource vm}, Path=ScanBLECommand}"/>
+            <Button Grid.Column="1" Text="{x:Static rs:AppResources.SortDevicesByRssi}" Command="{Binding Source={StaticResource vm}, Path=SortDevicesCommand}"/>
         </Grid>
     </StackLayout>
 </ContentPage>

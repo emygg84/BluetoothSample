@@ -86,5 +86,14 @@ namespace BluetoothSample.Resources {
                 return ResourceManager.GetString("ShowDevices", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by RSSI.
+        /// </summary>
+        internal static string SortDevicesByRssi {
+            get {
+                return ResourceManager.GetString("SortDevicesByRssi", resourceCulture);
+            }
+        }
     }
 }
