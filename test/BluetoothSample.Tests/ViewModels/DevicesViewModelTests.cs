@@ -50,31 +50,5 @@ namespace BluetoothSample.Tests.ViewModels
             Assert.AreEqual(firstDevice.Rssi, 1);
             Assert.AreEqual(lastDevice.Rssi, 3);
         }
-
-
-
-        protected List<IDevice> GetDevices()
-        {
-            var devices = new List<IDevice>()
-            {
-                new DeviceBLE
-                {
-                    Name = "Bluetooth 2",
-                    Rssi = 2
-                },
-                new DeviceBLE
-                {
-                    Name = "Bluetooth 1",
-                    Rssi = 1
-                },
-                new DeviceBLE
-                {
-                    Name = "Bluetooth 1",
-                    Rssi = 3
-                }
-            };  
-            
-            return devices;
-        }
     }
 }
