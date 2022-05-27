@@ -42,12 +42,14 @@ namespace BluetoothSample.ViewModels
             // se ejecuta cuando BLE encuentra un dispositivo que esta en advertising
             bleAdapter.DeviceDiscovered += BleAdapter_DeviceDiscovered;
 
-            Status = "Ready...";
+            Status = "Bluetooth is ready...";
+            HasRows = false;
         }
 
         private void BleHandler_StateChanged(object sender, BluetoothStateChangedArgs e)
         {
             Status = $"Bluetooth status: {e.NewState}";
+            IsConnected = e.NewState == BluetoothState.On;
         }
 
         private void BleAdapter_ScanTimeoutElapsed(object sender, EventArgs e)
@@ -70,6 +72,7 @@ namespace BluetoothSample.ViewModels
             //if (!lstDispositivoRepetido.Any())
             //{
             DeviceList.Add(device);
+            HasRows = DeviceList.Count > 0;
             //}
 
         }
@@ -85,6 +88,34 @@ namespace BluetoothSample.ViewModels
             {
                 _status = value;
                 OnPropertyChanged("Status");
+            }
+        }
+
+        private bool _isConnected;
+        public bool IsConnected
+        {
+            get
+            {
+                return _isConnected;
+            }
+            set
+            {
+                _isConnected = value;
+                OnPropertyChanged("IsConnected");
+            }
+        }
+
+        private bool _hasRows;
+        public bool HasRows
+        {
+            get
+            {
+                return _hasRows;
+            }
+            set
+            {
+                _hasRows = value;
+                OnPropertyChanged("HasRows");
             }
         }
 
@@ -116,6 +147,7 @@ namespace BluetoothSample.ViewModels
                     //await bleAdapter.StartScanningForDevicesAsync();
                     var systemDevices = bleAdapter.GetSystemConnectedOrPairedDevices();
                     systemDevices.ForEach(e => DeviceList.Add(e));
+                    HasRows = DeviceList.Count > 0;
                 }
             }
             catch (System.Exception ex)
@@ -128,10 +160,12 @@ namespace BluetoothSample.ViewModels
 
         public void SortDevicesListByRssi()
         {
+            if (DeviceList.Count == 0) return;
             var list = new List<IDevice>();
             list.AddRange(DeviceList.OrderBy(d => d.Rssi));
             DeviceList.Clear();
             list.ForEach(e => DeviceList.Add(e));
+            HasRows = DeviceList.Count > 0;
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")
