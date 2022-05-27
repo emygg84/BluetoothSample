@@ -129,4 +129,13 @@
   <data name="SortDevicesByRssi" xml:space="preserve">
     <value>Ordenar por RSSI</value>
   </data>
+  <data name="BluetoothIsReady" xml:space="preserve">
+    <value>Bluetooth esta listo...</value>
+  </data>
+  <data name="BluetoothStatus" xml:space="preserve">
+    <value>Estado del Bluetooth</value>
+  </data>
+  <data name="ScanningDevices" xml:space="preserve">
+    <value>Buscando dispositivos</value>
+  </data>
 </root>

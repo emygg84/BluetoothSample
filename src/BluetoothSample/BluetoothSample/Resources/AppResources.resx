@@ -120,8 +120,17 @@
   <data name="AppDescription" xml:space="preserve">
     <value>This app shows all available Bluetooth devices near to the phone</value>
   </data>
+  <data name="BluetoothIsReady" xml:space="preserve">
+    <value>Bluetooth is ready...</value>
+  </data>
+  <data name="BluetoothStatus" xml:space="preserve">
+    <value>Bluetooth status</value>
+  </data>
   <data name="ScanForDevices" xml:space="preserve">
     <value>Scan for devices</value>
+  </data>
+  <data name="ScanningDevices" xml:space="preserve">
+    <value>Scanning devices</value>
   </data>
   <data name="ShowDevices" xml:space="preserve">
     <value>Show devices</value>

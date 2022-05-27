@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothSample.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothSample.iOS", "src\BluetoothSample\BluetoothSample.iOS\BluetoothSample.iOS.csproj", "{3BFF8FAB-8835-46BD-AEFF-AFFEB920450A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothSample", "src\BluetoothSample\BluetoothSample\BluetoothSample.csproj", "{0D513575-1284-48A3-8292-7DAC01BBB0A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothSample", "src\BluetoothSample\BluetoothSample\BluetoothSample.csproj", "{0D513575-1284-48A3-8292-7DAC01BBB0A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{51376EF4-EF4E-4FB5-8AC9-A682DE094C11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

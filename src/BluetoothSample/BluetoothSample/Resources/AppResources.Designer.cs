@@ -70,11 +70,38 @@ namespace BluetoothSample.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bluetooth is ready....
+        /// </summary>
+        internal static string BluetoothIsReady {
+            get {
+                return ResourceManager.GetString("BluetoothIsReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bluetooth status.
+        /// </summary>
+        internal static string BluetoothStatus {
+            get {
+                return ResourceManager.GetString("BluetoothStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scan for devices.
         /// </summary>
         internal static string ScanForDevices {
             get {
                 return ResourceManager.GetString("ScanForDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning devices.
+        /// </summary>
+        internal static string ScanningDevices {
+            get {
+                return ResourceManager.GetString("ScanningDevices", resourceCulture);
             }
         }
         

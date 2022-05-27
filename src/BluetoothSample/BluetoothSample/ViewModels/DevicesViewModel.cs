@@ -9,6 +9,7 @@ using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using BluetoothSample.Resources;
 
 namespace BluetoothSample.ViewModels
 {
@@ -42,20 +43,20 @@ namespace BluetoothSample.ViewModels
             // se ejecuta cuando BLE encuentra un dispositivo que esta en advertising
             bleAdapter.DeviceDiscovered += BleAdapter_DeviceDiscovered;
 
-            Status = "Bluetooth is ready...";
+            Status = AppResources.BluetoothIsReady;
             HasRows = false;
         }
 
         private void BleHandler_StateChanged(object sender, BluetoothStateChangedArgs e)
         {
-            Status = $"Bluetooth status: {e.NewState}";
+            Status = $"{AppResources.BluetoothStatus}: {e.NewState}";
             IsConnected = e.NewState == BluetoothState.On;
         }
 
         private void BleAdapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Bluetooth scan finished");
-            Status = $"Bluetooth status: {bleHandler.State}";
+            Status = $"{AppResources.BluetoothStatus}: {bleHandler.State}";
         }
 
         private void BleAdapter_DeviceDiscovered(object sender, DeviceEventArgs e)
@@ -142,7 +143,7 @@ namespace BluetoothSample.ViewModels
                 if (!bleAdapter.IsScanning)
                 {
                     System.Diagnostics.Debug.WriteLine("Comienza el escaneo");
-                    Status = "Escanenado por dispositivos BLE";
+                    Status = AppResources.ScanningDevices;
                     DeviceList.Clear();
                     //await bleAdapter.StartScanningForDevicesAsync();
                     var systemDevices = bleAdapter.GetSystemConnectedOrPairedDevices();
