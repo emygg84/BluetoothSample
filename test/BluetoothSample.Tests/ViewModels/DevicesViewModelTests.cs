@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BluetoothSample.ViewModels;
 using BluetoothSample.Tests.FakeModels;
 using Plugin.BLE.Abstractions.Contracts;
+using Moq;
 
 namespace BluetoothSample.Tests.ViewModels
 {
@@ -17,7 +18,9 @@ namespace BluetoothSample.Tests.ViewModels
         public void SortDevicesByRssiTest()
         {
             //Initialize
-            var vm = new DevicesViewModel();
+            var bleHandlerMock = new Mock<IBluetoothLE>();
+            var bleAdapterMock = new Mock<IAdapter>();
+            var vm = new DevicesViewModel(bleAdapterMock.Object, bleHandlerMock.Object);
 
             //Arrange
             vm.DeviceList.Add(new DeviceBLE
@@ -35,7 +38,7 @@ namespace BluetoothSample.Tests.ViewModels
             vm.DeviceList.Add(new DeviceBLE
             {
                 Name = "Bluetooth 3",
-                Rssi = 1
+                Rssi = 3
             });
 
             // Act

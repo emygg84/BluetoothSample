@@ -18,30 +18,36 @@ namespace BluetoothSample.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         // gestor de BLE
-        private IAdapter bleAdapter;
-        private IBluetoothLE bleHandler;
+        private IAdapter _bleAdapter;
+        private IBluetoothLE _bleHandler;
 
         public DevicesViewModel()
+            : this(CrossBluetoothLE.Current.Adapter, CrossBluetoothLE.Current)
+        {
+
+        }
+
+        public DevicesViewModel(IAdapter bleAdapter, IBluetoothLE bleHandler)
         {
             DeviceList = new ObservableCollection<IDevice>();
             ScanBLECommand = new Command(ScanBLE);
             SortDevicesCommand = new Command(SortDevicesListByRssi);
 
             // obteniendo las instancias del hardware ble
-            bleHandler = CrossBluetoothLE.Current;
-            bleAdapter = CrossBluetoothLE.Current.Adapter;
+            _bleHandler = bleHandler;
+            _bleAdapter = bleAdapter;
 
             // configurando evento inicial del proceso de escaneo de dispositivos 
             // y cambios de estado
-            bleHandler.StateChanged += BleHandler_StateChanged;
+            _bleHandler.StateChanged += BleHandler_StateChanged;
 
-            bleAdapter.ScanMode = ScanMode.LowPower; // se establece que el escaneo de advertising se optimiza para bajo consumo 
-            bleAdapter.ScanTimeout = 120000; // tiempo de busqueda de dispositivos en advertising
-            bleAdapter.ScanTimeoutElapsed += BleAdapter_ScanTimeoutElapsed;
+            _bleAdapter.ScanMode = ScanMode.LowPower; // se establece que el escaneo de advertising se optimiza para bajo consumo 
+            _bleAdapter.ScanTimeout = 120000; // tiempo de busqueda de dispositivos en advertising
+            _bleAdapter.ScanTimeoutElapsed += BleAdapter_ScanTimeoutElapsed;
 
             // cuando se 'descubre' un dispositivo
             // se ejecuta cuando BLE encuentra un dispositivo que esta en advertising
-            bleAdapter.DeviceDiscovered += BleAdapter_DeviceDiscovered;
+            _bleAdapter.DeviceDiscovered += BleAdapter_DeviceDiscovered;
 
             Status = AppResources.BluetoothIsReady;
             HasRows = false;
@@ -56,7 +62,7 @@ namespace BluetoothSample.ViewModels
         private void BleAdapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Bluetooth scan finished");
-            Status = $"{AppResources.BluetoothStatus}: {bleHandler.State}";
+            Status = $"{AppResources.BluetoothStatus}: {_bleHandler.State}";
         }
 
         private void BleAdapter_DeviceDiscovered(object sender, DeviceEventArgs e)
@@ -140,13 +146,13 @@ namespace BluetoothSample.ViewModels
         {
             try
             {
-                if (!bleAdapter.IsScanning)
+                if (!_bleAdapter.IsScanning)
                 {
                     System.Diagnostics.Debug.WriteLine("Comienza el escaneo");
                     Status = AppResources.ScanningDevices;
                     DeviceList.Clear();
                     //await bleAdapter.StartScanningForDevicesAsync();
-                    var systemDevices = bleAdapter.GetSystemConnectedOrPairedDevices();
+                    var systemDevices = _bleAdapter.GetSystemConnectedOrPairedDevices();
                     systemDevices.ForEach(e => DeviceList.Add(e));
                     HasRows = DeviceList.Count > 0;
                 }
