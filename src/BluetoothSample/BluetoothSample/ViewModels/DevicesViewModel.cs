@@ -151,7 +151,11 @@ namespace BluetoothSample.ViewModels
                     System.Diagnostics.Debug.WriteLine("Comienza el escaneo");
                     Status = AppResources.ScanningDevices;
                     DeviceList.Clear();
-                    //await bleAdapter.StartScanningForDevicesAsync();
+                    // Uncomment to scan for devices
+                    //await bleAdapter.StartScanningForDevicesAsync(); 
+                    // Use the paired devices instead because I could not get the
+                    // near devices with the other method, needs more research
+                    // tested with Nokia 9
                     var systemDevices = _bleAdapter.GetSystemConnectedOrPairedDevices();
                     systemDevices.ForEach(e => DeviceList.Add(e));
                     HasRows = DeviceList.Count > 0;
